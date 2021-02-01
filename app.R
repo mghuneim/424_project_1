@@ -8,7 +8,10 @@
 #
 
 library(shiny)
+library(shinydashboard)
+library(DT)
 library(ggplot2)
+library(lubridate)
 
 
 states <- read.csv("annual_generation_state.csv", header = TRUE)
@@ -47,38 +50,34 @@ ggplot(totals, aes(x = YEAR, y = GENERATION..Megawatthours.)) + geom_line() + ge
 tabEnergy <- table(newStates$YEAR, newStates$ENERGY.SOURCE, newStates$GENERATION..Megawatthours., newStates$STATE)
 
 # Define UI for application that draws a histogram
-ui <- fluidPage(
-
+ui <- dashboardPage(
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
+    dashboardHeader(title = "Power and the Passion"),
+    dashboardSidebar(),
+    dashboardBody(
+        fluidRow(
+            column(8, 
+                 fluidRow(
+                     box(title = "Bar Graph of the Amount of Energy Sources (1990-2019)", solidHeader = TRUE,
+                         status = "primary", width = 5,
+                         plotOutput("plot1", height = 200)
+                         )
+                     )
+            )
         )
-    )
+                 
+            
+        )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    
+    theme_set(theme_grey(base_size = 18)) 
+    
+    output$plot1 <- renderPlot({
+        ggplot(notTotals, aes(x = YEAR, y = GENERATION..Megawatthours., fill = ENERGY.SOURCE)) + 
+            geom_bar(position = 'stack', stat = 'identity')
     })
 }
 
