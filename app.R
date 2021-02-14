@@ -164,6 +164,7 @@ ui <- dashboardPage(
                 ),
         #split screen
         tabItem(tabName = "split",
+                    #first column (left side)
                     column(3,
                            fluidRow(
                                box(title = "Bar Graph 1 of the Amount of Energy Sources (1990-2019)", solidHeader = TRUE,
@@ -181,6 +182,7 @@ ui <- dashboardPage(
                                )
                            )
                     ),
+                # second column (left side)
                 column(3,
                        fluidRow(
                            box( title = "Line Chart 1 of the Amount of Energy Sources", solidHeader = TRUE, status = "primary", width = 12,
@@ -198,6 +200,7 @@ ui <- dashboardPage(
                            )
                        )
                 ),
+                # first column (right side)
                     column(3,
                            fluidRow(
                                box(title = "Bar Graph 2 of the Amount of Energy Sources (1990-2019)", solidHeader = TRUE,
@@ -217,6 +220,7 @@ ui <- dashboardPage(
                                )
                            )
                     ),
+                # second column (right side)
                    column(3,
                        fluidRow(
                            box( title = "Line Chart 2 of the Amount of Energy Sources", solidHeader = TRUE, status = "primary", width = 12,
@@ -235,6 +239,7 @@ ui <- dashboardPage(
                        )
                    ),
                 ),
+        # heat maps
         tabItem(tabName = "heat",
                 column(4,
                        fluidRow(
@@ -277,7 +282,7 @@ ui <- dashboardPage(
             h3("ggplot2: https://ggplot2.tidyverse.org/reference/"),
             h3("usmap: https://www.rdocumentation.org/packages/usmap/versions/0.5.2"),
             h3("dplyr: https://www.rdocumentation.org/packages/dplyr/versions/0.7.8"),
-            h3("Shiny and Tutorial: https://shiny.rstudio.com/tutorial/")
+            h3("Shiny Tutorial: https://shiny.rstudio.com/tutorial/")
         )
         )
     )
