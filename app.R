@@ -52,6 +52,8 @@ levels(newStates$ENERGY.SOURCE)[levels(newStates$ENERGY.SOURCE) == "Wood and Woo
 notTotals <- subset(newStates, (newStates$ENERGY.SOURCE != "Total") & (newStates$TYPE.OF.PRODUCER == "Total Electric Power Industry"))
 df <- data.frame(notTotals$GENERATION..Megawatthours., notTotals$YEAR, notTotals$STATE, notTotals$ENERGY.SOURCE)
 
+usStates <- subset(newStates, (newStates$STATE != "US-TOTAL") & (newStates$STATE != "DC"))
+
 # making datasets to store the percentages 
 nt <- notTotals %>%
     group_by(YEAR) %>%
@@ -59,7 +61,7 @@ nt <- notTotals %>%
     ungroup() %>%
     select(YEAR, pc, STATE, ENERGY.SOURCE)
 
-ns <- newStates %>%
+ns <- usStates %>%
     group_by(YEAR) %>%
     mutate(pc = GENERATION..Megawatthours. / sum(GENERATION..Megawatthours.)) %>%
     ungroup() %>%
