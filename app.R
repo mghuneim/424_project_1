@@ -15,7 +15,6 @@ library(lubridate)
 library(dplyr)
 library(reshape2)
 library(usmap)
-library(usdata)
 
 # read in the csv file, get rid of the commas and convert the generation values to numeric
 newStates <- read.csv("annual_generation_state.csv", header = TRUE)
