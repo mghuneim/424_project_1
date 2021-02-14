@@ -52,12 +52,19 @@ levels(newStates$ENERGY.SOURCE)[levels(newStates$ENERGY.SOURCE) == "Wood and Woo
 notTotals <- subset(newStates, (newStates$ENERGY.SOURCE != "Total") & (newStates$TYPE.OF.PRODUCER == "Total Electric Power Industry"))
 df <- data.frame(notTotals$GENERATION..Megawatthours., notTotals$YEAR, notTotals$STATE, notTotals$ENERGY.SOURCE)
 
-# making a dataset to store the percentages 
+# making datasets to store the percentages 
 nt <- notTotals %>%
     group_by(YEAR) %>%
     mutate(pc = GENERATION..Megawatthours. / sum(GENERATION..Megawatthours.)) %>%
     ungroup() %>%
     select(YEAR, pc, STATE, ENERGY.SOURCE)
+
+ns <- newStates %>%
+    group_by(YEAR) %>%
+    mutate(pc = GENERATION..Megawatthours. / sum(GENERATION..Megawatthours.)) %>%
+    ungroup() %>%
+    select(YEAR, pc, STATE, ENERGY.SOURCE)
+
 
 # these will be useful for the menus when the user has to pick and choose what they want to output
 years <- c(1990:2019)
