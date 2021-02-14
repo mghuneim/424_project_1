@@ -17,7 +17,7 @@ library(reshape2)
 library(usmap)
 
 # read in the csv file, get rid of the commas and convert the generation values to numeric
-newStates <- read.csv("annual_generation_state.csv", header = TRUE)
+newStates <- read.csv("https://www.evl.uic.edu/aej/424/annual_generation_state.csv", header = TRUE)
 newStates$GENERATION..Megawatthours. <- gsub(",","", newStates$GENERATION..Megawatthours.)
 newStates$GENERATION..Megawatthours. <- as.numeric(newStates$GENERATION..Megawatthours.)
 
